@@ -20,13 +20,61 @@ exports.show = function(req, res) {
   });
 };
 
+//finding the polls for the user
+exports.find = function(req,res){
+    Poll.find({
+        author:req.params.name
+    }, function(err, polls){
+        if(err){
+            return handleError(res, err);
+        }
+        return res.json(polls);
+    })
+}
+
 // Creates a new poll in the DB.
 exports.create = function(req, res) {
-  Poll.create(req.body, function(err, poll) {
-    if(err) { return handleError(res, err); }
-    return res.status(201).json(poll);
-  });
+    var poll = req.body;
+    poll.votes = [];
+    poll.options.forEach(function(){
+
+        poll.votes.push(1);
+    });
+
+    Poll.create(poll, function(err, poll){
+        if(err){
+            return handleError(res, err);
+        }
+        return res.status(201).json(poll);
+    })
 };
+
+exports.addVote = function(req, res){
+    var id = req.paramas.id;
+    var optionIndex = req.params.option;
+    var username = req.user.name;
+
+    Poll.findById(id, function(err, poll){
+        if(err){
+            return handleError(res, req);
+        }
+        if(!poll){
+            return res.status(404).send('No such poll found');
+        }
+        if(poll.voted_users.indexOf(username) !== -1){
+            return res.sattus(403).send('you have already casted your vote for this poll');
+        }
+        poll.voted_users.push(username);
+        poll.votes[optionIndex] = poll.votes[optionIndex] + 1;
+        poll.markModified('votes');
+        poll.save(function(err, newPoll){
+            if(err){
+                return handleError(res,err);
+            }
+            return res.status(200).json(newPoll);
+        })
+    })
+}
 
 // Updates an existing poll in the DB.
 exports.update = function(req, res) {

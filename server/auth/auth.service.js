@@ -53,6 +53,19 @@ function hasRole(roleRequired) {
     });
 }
 
+function isOwner() {
+  return compose()
+  .use(isAuthenticated())
+  .use(function meetsRequirements(req, res, next) {
+    if (req.user.name === req.params.name) {
+      next();
+    } else {
+      res.status(403).send('Forbidden');
+    }
+  });
+}
+
+
 /**
  * Returns a jwt token signed by the app secret
  */

@@ -35,11 +35,11 @@ exports.find = function(req,res){
 // Creates a new poll in the DB.
 exports.create = function(req, res) {
     var poll = req.body;
-    poll.votes = [];
-    poll.options.forEach(function(){
-
-        poll.votes.push(1);
-    });
+//    poll.votes = [];
+//    poll.options.forEach(function(){
+//
+//        poll.votes.push(1);
+//    });
 
     Poll.create(poll, function(err, poll){
         if(err){
@@ -62,7 +62,7 @@ exports.addVote = function(req, res){
             return res.status(404).send('No such poll found');
         }
         if(poll.voted_users.indexOf(username) !== -1){
-            return res.sattus(403).send('you have already casted your vote for this poll');
+            return res.status(403).send('you have already casted your vote for this poll');
         }
         poll.voted_users.push(username);
         poll.votes[optionIndex] = poll.votes[optionIndex] + 1;

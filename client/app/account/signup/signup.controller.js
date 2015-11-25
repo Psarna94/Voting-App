@@ -16,7 +16,7 @@ angular.module('votingAppApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $location.path('/dashboard');
         })
         .catch( function(err) {
                 console.log(err);

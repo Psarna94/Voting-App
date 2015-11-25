@@ -19,9 +19,10 @@ angular.module('votingAppApp')
           $location.path('/');
         })
         .catch( function(err) {
+                console.log(err);
           err = err.data;
           $scope.errors = {};
-
+           console.log(err);
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);

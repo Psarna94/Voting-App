@@ -18,6 +18,7 @@ angular.module('votingAppApp')
           $location.path('/');
         })
         .catch( function(err) {
+          $scope.errorCaught = true;
           $scope.errors.other = err.message;
         });
       }

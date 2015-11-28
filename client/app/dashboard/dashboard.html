@@ -12,58 +12,73 @@
     </div>
 </md-toolbar>
 
-<md-content flex>
-    <div layout="column" layout-align="center center">
-        <h1>Dashboard</h1>
-        <h4>What would you like to do today?</h4>
+<div ng-hide="pollSuccess">
+    <md-content flex>
+        <div layout="column" layout-align="center center">
+            <h1>Dashboard</h1>
+            <h4>What would you like to do today?</h4>
 
-        <div layout="row" layout-align="center center" ng-show="newPoll">
-            <md-button class="md-accent md-raised" ng-click="newPoll = true">New Poll</md-button>
-            <md-button class="md-accent" ng-click="newPoll = false">My Polls</md-button>
-        </div>
-        <div layout="row" layout-align="center center" ng-hide="newPoll">
-            <md-button class="md-accent" ng-click="newPoll = true">New Poll</md-button>
-            <md-button class="md-accent md-raised" ng-click="newPoll = false">My Polls</md-button>
-        </div>
-    </div>
-</md-content>
-
-<md-content flex="100" ng-show="newPoll">
-
-    <form name="form" id="form" role="form" ng-submit="form.$valid && submitPoll()" layout="column"
-          layout-align="center center">
-        <h3>New Poll</h3>
-        <h6>name your poll</h6>
-        <md-input-container style="width: 40%;" flex="100">
-            <label></label>
-            <input type="text" ng-minlength="5" placeholder="What is your favorite band name?" ng-model="poll.name" required/>
-        </md-input-container>
-        <h5>Options</h5>
-
-        <div layout="row" layout-align="center center" ng-repeat="option in poll.options track by $index">
-            <md-input-container style="width:70%" flex="100">
-                <label></label>
-                <input type="text" placeholder="This is option {{$index}}" ng-model="poll.options[$index]" required/>
-            </md-input-container>
-            <md-button class="md-warn" type="button" ng-click="deleteOption($index)">delete</md-button>
-        </div>
-        <md-button class="md-accent" type="button" ng-click="addOption()">Add Option</md-button>
-
-        <div>
-            <md-button ng-disabled="disableChecker()" class="md-raised md-primary" type="submit"> Submit Poll
-            </md-button>
-        </div>
-    </form>
-</md-content>
-
-<md-content flex="100" ng-hide="newPoll">
-    <div layout="column" layout-align="center center">
-        <div ng-repeat="poll in myPolls track by $index">
-            <div layout="row" layout-align="center center">
-                <h6>{{poll.name}}</h6>
-
-                <md-button class="md-warn md-raised" ng-click="deletePoll(poll, $index)"> Delete</md-button>
+            <div layout="row" layout-align="center center" ng-show="newPoll">
+                <md-button class="md-accent md-raised" ng-click="newPoll = true">New Poll</md-button>
+                <md-button class="md-accent" ng-click="newPoll = false">My Polls</md-button>
+            </div>
+            <div layout="row" layout-align="center center" ng-hide="newPoll">
+                <md-button class="md-accent" ng-click="newPoll = true">New Poll</md-button>
+                <md-button class="md-accent md-raised" ng-click="newPoll = false">My Polls</md-button>
             </div>
         </div>
+    </md-content>
+
+    <md-content flex="100" ng-show="newPoll">
+
+        <form name="form" id="form" role="form" ng-submit="form.$valid && submitPoll()" layout="column"
+              layout-align="center center">
+            <h3>New Poll</h3>
+            <h6>name your poll</h6>
+            <md-input-container style="width: 40%;" flex="100">
+                <label></label>
+                <input type="text" ng-minlength="5" placeholder="What is your favorite band name?" ng-model="poll.name"
+                       required/>
+            </md-input-container>
+            <h5>Options</h5>
+
+            <div layout="row" layout-align="center center" ng-repeat="option in poll.options track by $index">
+                <md-input-container style="width:70%" flex="100">
+                    <label></label>
+                    <input type="text" placeholder="This is option {{$index}}" ng-model="poll.options[$index]"
+                           required/>
+                </md-input-container>
+                <md-button class="md-warn" type="button" ng-click="deleteOption($index)">delete</md-button>
+            </div>
+            <md-button class="md-accent" type="button" ng-click="addOption()">Add Option</md-button>
+
+            <div>
+                <md-button ng-disabled="disableChecker()" class="md-raised md-primary" type="submit"> Submit Poll
+                </md-button>
+            </div>
+        </form>
+    </md-content>
+
+    <md-content flex="100" ng-hide="newPoll">
+        <div layout="column" layout-align="center center">
+            <div ng-repeat="poll in myPolls track by $index">
+                <div layout="row" layout-align="center center">
+                    <h6>{{poll.name}}</h6>
+
+                    <md-button class="md-warn md-raised" ng-click="deletePoll(poll, $index)"> Delete</md-button>
+                </div>
+            </div>
+        </div>
+    </md-content>
+
+    <div>
+        {{myPolls[myPolls.length-1].name}}
     </div>
-</md-content>
+
+</div>
+
+<div layout="column" layout-align="center center" ng-show="pollSuccess">
+    <h2>Congratulations!</h2>
+    <h4>Your poll has been posted to:</h4>
+    <a ng-click="gotoPoll()">http://localhost:9000/{{getCurrentUser().name}}/{{nameOfPoll}}</a>
+</div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('votingAppApp')
-    .controller('DashboardCtrl', function ($scope, $http, $window, Auth) {
+    .controller('DashboardCtrl', function ($scope, $http, $window, Auth, $state) {
         $scope.getCurrentUser = Auth.getCurrentUser;
         $scope.newPoll = true;
         $scope.myPolls = [
@@ -47,7 +47,9 @@ angular.module('votingAppApp')
             $http.post('/api/polls', $scope.poll)
                 .success(function (response) {
                     console.log(response);
+                    $scope.nameOfPoll = response.name;
                     $scope.myPolls.push(response);
+                    $scope.pollSuccess = true;
                     clearPoll();
                 })
         };
@@ -66,6 +68,11 @@ angular.module('votingAppApp')
                 .success(function (response) {
                     $scope.myPolls.splice(index, 1);
                 })
+        }
+
+        $scope.gotoPoll = function(){
+            console.log("wassup");
+            $state.go('poll', {username:$scope.poll.author, pollname:$scope.nameOfPoll});
         }
 
     });

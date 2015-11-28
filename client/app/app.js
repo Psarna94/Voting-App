@@ -12,6 +12,7 @@ angular.module('votingAppApp', [
         $urlRouterProvider
             .otherwise('/');
 
+        $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('authInterceptor');
 
 //    theme as per the angular material library

@@ -61,24 +61,27 @@
 
     <md-content flex="100" ng-hide="newPoll">
         <div layout="column" layout-align="center center">
-            <div ng-repeat="poll in myPolls track by $index">
-                <div layout="row" layout-align="center center">
-                    <h6>{{poll.name}}</h6>
-
-                    <md-button class="md-warn md-raised" ng-click="deletePoll(poll, $index)"> Delete</md-button>
-                </div>
-            </div>
+            <div style="height:30px"></div>
+            <table>
+                <tbody>
+                <tr ng-repeat="poll in myPolls track by $index">
+                    <td layout="row" layout-align="center center">
+                        <h6 ng-click="gotoPoll(poll)">{{poll.name}}</h6>
+                    </td>
+                    <td>
+                        <md-button class="md-warn" ng-click="deletePoll(poll, $index)"> Delete</md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </md-content>
 
-    <div>
-        {{myPolls[myPolls.length-1].name}}
-    </div>
-
+   
 </div>
 
 <div layout="column" layout-align="center center" ng-show="pollSuccess">
     <h2>Congratulations!</h2>
     <h4>Your poll has been posted to:</h4>
-    <a ng-click="gotoPoll()">http://localhost:9000/{{getCurrentUser().name}}/{{nameOfPoll}}</a>
+    <a ng-click="gotoPoll(myPolls[myPolls.length-1])">http://localhost:9000/{{getCurrentUser().name}}/{{nameOfPoll}}</a>
 </div>

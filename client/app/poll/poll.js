@@ -4,12 +4,9 @@ angular.module('votingAppApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('poll', {
-                url        : '/',
+                url        : '/:username/:pollname',
                 templateUrl: 'app/poll/poll.html',
-                controller : 'PollCtrl',
-                params     : {
-                    username: null,
-                    pollname: null
-                }
+                controller : 'PollCtrl'
+
             });
     });

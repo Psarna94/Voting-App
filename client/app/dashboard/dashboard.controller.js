@@ -70,9 +70,9 @@ angular.module('votingAppApp')
                 })
         }
 
-        $scope.gotoPoll = function(){
-            console.log("wassup");
-            $state.go('poll', {username:$scope.poll.author, pollname:$scope.nameOfPoll});
+        $scope.gotoPoll = function(poll){
+
+            $state.go('poll', {username:poll.author, pollname:poll.name});
         }
 
     });

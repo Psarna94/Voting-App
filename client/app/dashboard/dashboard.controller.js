@@ -44,7 +44,7 @@ angular.module('votingAppApp')
         };
 
         $scope.submitPoll = function () {
-            $http.post('/api/polls', $scope.polls)
+            $http.post('/api/polls', $scope.poll)
                 .success(function (response) {
                     console.log(response);
                     $scope.myPolls.push(response.data);

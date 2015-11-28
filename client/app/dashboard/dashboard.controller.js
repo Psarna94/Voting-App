@@ -7,13 +7,13 @@ angular.module('votingAppApp')
         $scope.myPolls = [
             {
                 options: ['label1', 'label2'],
-                votes: [0, 1]
+                votes  : [0, 1]
             }
         ];
 
         $scope.poll = {
-            author: $scope.getCurrentUser().name,
-            name: '',
+            author : $scope.getCurrentUser().name,
+            name   : '',
             options: ["", ""]
         };
 
@@ -29,8 +29,8 @@ angular.module('votingAppApp')
 
         function clearPoll() {
             $scope.poll = {
-                author: $scope.getCurrentUser().name,
-                name: '',
+                author : $scope.getCurrentUser().name,
+                name   : '',
                 options: ["", ""]
             }
         }
@@ -47,14 +47,12 @@ angular.module('votingAppApp')
             $http.post('/api/polls', $scope.poll)
                 .success(function (response) {
                     console.log(response);
-                    $scope.myPolls.push(response.data);
+                    $scope.myPolls.push(response);
                     clearPoll();
                 })
         };
 
-
         $scope.disableChecker = function () {
-
 
             if ($scope.poll.name.length > 0 && $scope.poll.options.length > 1) {
                 return false;
@@ -63,5 +61,11 @@ angular.module('votingAppApp')
             }
         }
 
+        $scope.deletePoll = function (item, index) {
+            $http.delete('/api/polls/' + item._id)
+                .success(function (response) {
+                    $scope.myPolls.splice(index, 1);
+                })
+        }
 
     });

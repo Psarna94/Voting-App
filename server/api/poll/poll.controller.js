@@ -97,7 +97,7 @@ exports.destroy = function(req, res) {
     if(!poll) { return res.status(404).send('Not Found'); }
     poll.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.status(204).send('No Content');
+      return res.status(204).send('Poll deleted');
     });
   });
 };

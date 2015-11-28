@@ -58,10 +58,11 @@
 
 <md-content flex="100" ng-hide="newPoll">
     <div layout="column" layout-align="center center">
-        <div ng-repeat="poll in myPolls">
+        <div ng-repeat="poll in myPolls track by $index">
             <div layout="row" layout-align="center center">
                 <h6>{{poll.name}}</h6>
-                <md-button class="md-warn md-raised"> Delete</md-button>
+
+                <md-button class="md-warn md-raised" ng-click="deletePoll(poll, $index)"> Delete</md-button>
             </div>
         </div>
     </div>

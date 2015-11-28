@@ -10,7 +10,7 @@ router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.get('/user/:name', controller.find);
 router.post('/', controller.create);
-router.post(':id/:option',auth.isAuthenticated(), controller.addVote);
+router.post('/:id/:option',auth.isAuthenticated(), controller.addVote);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);

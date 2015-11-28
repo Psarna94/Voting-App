@@ -13,8 +13,8 @@ angular.module('votingAppApp')
 
         $scope.poll = {
             author: $scope.getCurrentUser().name,
-            name: ' ',
-            options: [" ", " "]
+            name: '',
+            options: ["", ""]
         };
 
         getPolls();
@@ -50,6 +50,17 @@ angular.module('votingAppApp')
                     $scope.myPolls.push(response.data);
                     clearPoll();
                 })
+        };
+
+
+        $scope.disableChecker = function () {
+
+
+            if ($scope.poll.name.length > 0 && $scope.poll.options.length > 1) {
+                return false;
+            } else {
+                return true;
+            }
         }
 
 

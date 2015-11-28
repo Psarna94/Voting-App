@@ -26,26 +26,28 @@
 
 <md-content flex="100">
 
-    <form name="form" id="form" role="form" ng-submit="form.$valid && submitPoll()" layout="column" layout-align="center center">
+    <form name="form" id="form" role="form" ng-submit="form.$valid && submitPoll()" layout="column"
+          layout-align="center center">
         <h3>New Poll</h3>
         <h6>name your poll</h6>
         <md-input-container style="width: 40%;" flex="100">
             <label></label>
-            <input type="text" placeholder="What is your favorite band name?" ng-model="poll.name" required/>
+            <input type="text" ng-minlength="5" placeholder="What is your favorite band name?" ng-model="poll.name" required/>
         </md-input-container>
         <h5>Options</h5>
 
         <div layout="row" layout-align="center center" ng-repeat="option in poll.options track by $index">
-            <md-input-container>
+            <md-input-container style="width:70%" flex="100">
                 <label></label>
-                <input type="text" placeholder="This is option {{$index}}" ng-model="poll.options[$index]"/>
+                <input type="text" placeholder="This is option {{$index}}" ng-model="poll.options[$index]" required/>
             </md-input-container>
             <md-button class="md-warn" type="button" ng-click="deleteOption($index)">delete</md-button>
         </div>
         <md-button class="md-accent" type="button" ng-click="addOption()">Add Option</md-button>
 
         <div>
-            <md-button class="md-raised md-primary" type="submit"> Submit Poll </md-button>
+            <md-button ng-disabled="disableChecker()" class="md-raised md-primary" type="submit"> Submit Poll
+            </md-button>
         </div>
     </form>
 </md-content>

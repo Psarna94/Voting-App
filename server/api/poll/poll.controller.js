@@ -50,7 +50,7 @@ exports.create = function(req, res) {
 };
 
 exports.addVote = function(req, res){
-    var id = req.paramas.id;
+    var id = req.params.id;
     var optionIndex = req.params.option;
     var username = req.user.name;
 

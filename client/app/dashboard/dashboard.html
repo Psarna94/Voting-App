@@ -17,14 +17,18 @@
         <h1>Dashboard</h1>
         <h4>What would you like to do today?</h4>
 
-        <div layout="row" layout-align="center center">
-            <md-button class="md-accent md-raised">New Poll</md-button>
-            <md-button class="md-accent">My Polls</md-button>
+        <div layout="row" layout-align="center center" ng-show="newPoll">
+            <md-button class="md-accent md-raised" ng-click="newPoll = true">New Poll</md-button>
+            <md-button class="md-accent" ng-click="newPoll = false">My Polls</md-button>
+        </div>
+        <div layout="row" layout-align="center center" ng-hide="newPoll">
+            <md-button class="md-accent" ng-click="newPoll = true">New Poll</md-button>
+            <md-button class="md-accent md-raised" ng-click="newPoll = false">My Polls</md-button>
         </div>
     </div>
 </md-content>
 
-<md-content flex="100">
+<md-content flex="100" ng-show="newPoll">
 
     <form name="form" id="form" role="form" ng-submit="form.$valid && submitPoll()" layout="column"
           layout-align="center center">
@@ -50,4 +54,15 @@
             </md-button>
         </div>
     </form>
+</md-content>
+
+<md-content flex="100" ng-hide="newPoll">
+    <div layout="column" layout-align="center center">
+        <div ng-repeat="poll in myPolls">
+            <div layout="row" layout-align="center center">
+                <h6>{{poll.name}}</h6>
+                <md-button class="md-warn md-raised"> Delete</md-button>
+            </div>
+        </div>
+    </div>
 </md-content>

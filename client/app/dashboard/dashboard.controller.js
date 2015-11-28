@@ -3,7 +3,7 @@
 angular.module('votingAppApp')
     .controller('DashboardCtrl', function ($scope, $http, $window, Auth) {
         $scope.getCurrentUser = Auth.getCurrentUser;
-
+        $scope.newPoll = true;
         $scope.myPolls = [
             {
                 options: ['label1', 'label2'],
@@ -30,8 +30,8 @@ angular.module('votingAppApp')
         function clearPoll() {
             $scope.poll = {
                 author: $scope.getCurrentUser().name,
-                name: ' ',
-                options: [" ", " "]
+                name: '',
+                options: ["", ""]
             }
         }
 

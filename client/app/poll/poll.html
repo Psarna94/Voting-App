@@ -1,0 +1,45 @@
+<md-toolbar>
+    <div layout="row">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Basejump 1: VotePlex</span>
+            </h2>
+
+            <span flex></span>
+            <h5>Hello, {{username}}</h5>
+            <md-button class="md-accent md-raised" ng-click="logout()">Logout</md-button>
+        </div>
+    </div>
+</md-toolbar>
+
+<md-content>
+    <div layout="column" layout-align="center center">
+        <h2>
+            {{poll.name}}
+        </h2>
+        <h4>
+            by {{poll.author}}
+        </h4>
+
+        <div layout="column" layout-align="center center" ng-hide="showChart">
+            <div>
+                Choose from the following options:
+            </div>
+            <md-radio-group>
+                <div ng-repeat="option in poll.options track by $index">
+                    <md-radio-button ng-click="optionIndexFinder($index)" value="{{option}}">{{option}}
+                    </md-radio-button>
+                </div>
+            </md-radio-group>
+            <md-button ng-click="upVote()" ng-disabled="disable" ng- class="md-raised md-primary">Submit</md-button>
+        </div>
+    </div>
+</md-content>
+
+<md-content ng-show="showChart">
+    <canvas id="{{poll._id}}" class="chart chart-bar"
+            chart-data="data" chart-labels="poll.options"
+            >
+    </canvas>
+
+</md-content>

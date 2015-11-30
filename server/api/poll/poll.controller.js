@@ -30,7 +30,7 @@ exports.find = function(req,res){
         }
         return res.json(polls);
     })
-}
+};
 
 // Creates a new poll in the DB.
 exports.create = function(req, res) {

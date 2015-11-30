@@ -71,9 +71,14 @@ angular.module('votingAppApp')
                 })
         }
 
-        $scope.gotoPoll = function(poll){
+        $scope.gotoPoll = function (poll) {
 
-            $state.go('poll', {username:poll.author, pollname:poll.name, pollid:poll._id});
+            $state.go('poll', {username: poll.author, pollname: poll.name, pollid: poll._id});
+        }
+
+        $scope.logout = function () {
+            Auth.logout;
+            $state.go('main');
         }
 
     });

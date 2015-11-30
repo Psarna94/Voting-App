@@ -2,9 +2,15 @@
 
 angular.module('votingAppApp')
     .controller('PollCtrl', function ($scope, $stateParams, $http, $state, Auth) {
-
+        $scope.username = Auth.getCurrentUser().name;
         $scope.showChart = false;
         $scope.disable = true;
+
+        if(Auth.isLoggedIn){
+            $scope.showChart = false;
+        }else{
+            $scope.showChart = true;
+        }
 
         $http.get('api/polls/' + $stateParams.pollid)
             .success(function (response) {
@@ -32,9 +38,10 @@ angular.module('votingAppApp')
                 });
         }
 
-//        $scope.data = [];
+        $scope.logout = function(){
+            Auth.logout;
+            $state.go('main');
+        }
 
-//        $scope.data.push($scope.poll.votes);
 
-//        $scope.data = [$scope.poll.vote];
     });

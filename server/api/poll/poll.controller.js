@@ -35,11 +35,11 @@ exports.find = function(req,res){
 // Creates a new poll in the DB.
 exports.create = function(req, res) {
     var poll = req.body;
-//    poll.votes = [];
-//    poll.options.forEach(function(){
-//
-//        poll.votes.push(1);
-//    });
+    poll.votes = [];
+    poll.options.forEach(function(){
+
+        poll.votes.push(0);
+    });
 
     Poll.create(poll, function(err, poll){
         if(err){

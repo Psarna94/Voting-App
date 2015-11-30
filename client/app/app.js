@@ -6,7 +6,8 @@ angular.module('votingAppApp', [
     'ngSanitize',
     'ui.router',
     'ngAnimate',
-    'ngMaterial'
+    'ngMaterial',
+    'chart.js'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
         $urlRouterProvider

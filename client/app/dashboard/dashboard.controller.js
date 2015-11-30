@@ -24,6 +24,7 @@ angular.module('votingAppApp')
                 .success(function (response) {
                     console.log(response);
                     $scope.myPolls = response;
+                    console.log($scope.myPolls);
                 });
         }
 
@@ -72,7 +73,7 @@ angular.module('votingAppApp')
 
         $scope.gotoPoll = function(poll){
 
-            $state.go('poll', {username:poll.author, pollname:poll.name});
+            $state.go('poll', {username:poll.author, pollname:poll.name, pollid:poll._id});
         }
 
     });
